@@ -2,6 +2,7 @@
 #include "x11func.h"
 #include <stdint.h>
 #include <stdio.h>
+#include <string.h>
 
 //------------------------------------------------------------------------------------
 // Module Functions Declaration (local)
@@ -15,20 +16,37 @@ static void UpdateDrawFrame(void);  // Update and Draw (one frame)
 //------------------------------------------------------------------------------------
 // Program main entry point
 //------------------------------------------------------------------------------------
+
+struct Window {
+    int fps;
+    int width;
+    int height;
+    char title[30];
+};
+
+struct Mascot {
+    Texture2D texture;
+    Vector2 position;
+};
+
+struct Ornament {
+    Texture2D texture;
+    Vector2 position;
+};
+
 int main(void)
 {
-    const int fps = 60;
-    const int width = 1920/2;
-    const int height = 1080/2;
+   struct Window window;
+   window.fps = 60;
+   window.width = 100;
+   window.height = 100;
+   strncpy(window.title, "dog", sizeof(window.title));
+   
 
-
-    InitWindow(width,height, "ww2");
+    InitWindow(window.width, window.height, window.title);
     InitGame();
-
-    GetProgramWindow(GetWindowHandle());
-
-
-    SetTargetFPS(fps);
+    GetProgramWindow();
+    SetTargetFPS(window.fps);
     
     while (!WindowShouldClose())
     {

@@ -2,6 +2,5 @@
 
 #ifndef X11FUNC_H_
 #define X11FUNC_H_
-void GetProgramWindow(int*);
-void SetWindowAsRoot(void);
+void GetProgramWindow(void);
 #endif
