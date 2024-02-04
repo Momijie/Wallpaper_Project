@@ -71,6 +71,16 @@ target_link_libraries(Wallpaper_Project_exe PRIVATE Wallpaper_Project_lib)
 target_link_libraries(Wallpaper_Project_exe PRIVATE raylib)
 target_link_libraries(Wallpaper_Project_exe PRIVATE ${X11_LIBRARIES})
 
+
+
+
+# ---- Copy res ----
+
+set(RESOURCES_SRC_DIR "${CMAKE_CURRENT_SOURCE_DIR}/res")
+set(RESOURCES_DST_DIR "${CMAKE_CURRENT_BINARY_DIR}")
+file(MAKE_DIRECTORY ${RESOURCES_DST_DIR})
+file(COPY ${RESOURCES_SRC_DIR} DESTINATION ${RESOURCES_DST_DIR})
+
 # ---- Install rules ----
 
 if(NOT CMAKE_SKIP_INSTALL_RULES)
@@ -87,5 +97,7 @@ elseif(NOT PROJECT_IS_TOP_LEVEL)
       "Developer mode is intended for developers of Wallpaper_Project"
   )
 endif()
+
+
 
 include(cmake/dev-mode.cmake)
