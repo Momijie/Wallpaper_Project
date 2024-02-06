@@ -49,6 +49,8 @@ endif()
 find_package(X11 REQUIRED)
 include_directories(${X11_INCLUDE_DIR})
 
+find_package(Lua REQUIRED)
+include_directories(/usr/local/include ${LUA_INCLUDE_DIR})
 
 target_include_directories(
     Wallpaper_Project_lib ${warning_guard}
@@ -70,9 +72,7 @@ target_compile_features(Wallpaper_Project_exe PRIVATE c_std_99)
 target_link_libraries(Wallpaper_Project_exe PRIVATE Wallpaper_Project_lib)
 target_link_libraries(Wallpaper_Project_exe PRIVATE raylib)
 target_link_libraries(Wallpaper_Project_exe PRIVATE ${X11_LIBRARIES})
-
-
-
+target_link_libraries(Wallpaper_Project_exe PRIVATE ${LUA_LIBRARIES})
 
 # ---- Copy res ----
 
