@@ -62,7 +62,7 @@ target_compile_features(Wallpaper_Project_lib PUBLIC c_std_99)
 
 # ---- Declare executable ----
 
-add_executable(Wallpaper_Project_exe source/main.c source/x11func.c)
+add_executable(Wallpaper_Project_exe source/main.c source/x11func.c source/engine.c)
 add_executable(Wallpaper_Project::exe ALIAS Wallpaper_Project_exe)
 
 set_property(TARGET Wallpaper_Project_exe PROPERTY OUTPUT_NAME Wallpaper_Project)
