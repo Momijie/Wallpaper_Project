@@ -31,6 +31,7 @@ struct Ornament {
 };
 
 extern struct Ornament ornament[];
+extern Camera camera;
 
 extern lua_State* GL;
 #endif
