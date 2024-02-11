@@ -17,10 +17,7 @@
 #define VERSION 1.0
 #define ORNAMENT_MAX 1024
 
-enum THEME {
-    THEME_BACKGROUND = 0X1E1E2E
-
-};
+enum THEME { THEME_BACKGROUND = 0X1E1E2E };
 
 struct Window {
     int fps;
