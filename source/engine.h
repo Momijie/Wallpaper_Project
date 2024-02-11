@@ -8,7 +8,6 @@
 #include <stdio.h>
 extern lua_State* L;
 
-void AddFuncs(void);
 void InitEngine(void);
 
 #endif
