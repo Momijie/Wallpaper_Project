@@ -19,13 +19,13 @@
 
 enum THEME { THEME_BACKGROUND = 0X1E1E2E };
 
-struct Window {
+typedef struct {
     int fps;
     int width;
     int height;
     char* title;
     Color backgroundColor;
-};
+} WW2_Window;
 
 struct Ornament {
     Texture2D texture;

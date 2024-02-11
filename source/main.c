@@ -7,10 +7,10 @@ static void UpdateGame(void);
 static void DrawGame(void);
 static void UnloadGame(void);
 static void UpdateDrawFrame(void);
-static void SetWindow(struct Window* window, char* title, int fps, int width, int height);
+static void SetWindow(WW2_Window* window, char* title, int fps, int width, int height);
 
 struct Ornament ornament[ORNAMENT_MAX];
-struct Window window;
+WW2_Window window;
 Camera camera = {0};
 Texture2D texture;
 Model sphere;
@@ -63,7 +63,7 @@ void UpdateDrawFrame(void) {
     DrawGame();
 }
 
-void SetWindow(struct Window* window, char* title, int fps, int width, int height) {
+void SetWindow(WW2_Window* window, char* title, int fps, int width, int height) {
     window->fps             = fps;
     window->width           = width;
     window->height          = height;
