@@ -28,7 +28,7 @@ typedef struct {
 } WW2_Window;
 
 typedef struct {
-    Texture2D texture;
+    Texture texture;
     Rectangle source;
     Vector2 position;
 } WW2_Ornament;
