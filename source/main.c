@@ -1,35 +1,22 @@
-#include <lauxlib.h>
-#include <stdint.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
 #include "engine.h"
 #include "globals.h"
-#include "raylib.h"
-#include "raymath.h"
-#include "rlgl.h"
-#include "x11func.h"
 
 static void InitGame(void);
 static void UpdateGame(void);
 static void DrawGame(void);
 static void UnloadGame(void);
 static void UpdateDrawFrame(void);
-
-void SetWindow(struct Window* window, char* title, int fps, int width, int height) {
-    window->fps             = fps;
-    window->width           = width;
-    window->height          = height;
-    window->title           = title;
-    window->backgroundColor = GetColor(THEME_BACKGROUND);
-}
+static void SetWindow(struct Window* window, char* title, int fps, int width, int height);
 
 struct Ornament ornament[ORNAMENT_MAX];
 struct Window window;
 Camera camera = {0};
 Texture2D texture;
 Model sphere;
+// temporary
+float rotation = 0.0f;
+
 int main(void) {
     SetWindow(&window, "Wallpaper Waifu2", 60, 1920, 1080);
     InitWindow(window.width, window.height, window.title);
@@ -54,9 +41,7 @@ int main(void) {
     return 0;
 }
 
-void FlipOrnament(struct Ornament* ornament) { ornament->source.width = -ornament->texture.width; }
-float rotation = 0.0f;
-void InitGame(void) { FlipOrnament(&ornament[0]); }
+void InitGame(void) {}
 
 void UpdateGame(void) {}
 void DrawGame(void) {
@@ -78,3 +63,10 @@ void UpdateDrawFrame(void) {
     DrawGame();
 }
 
+void SetWindow(struct Window* window, char* title, int fps, int width, int height) {
+    window->fps             = fps;
+    window->width           = width;
+    window->height          = height;
+    window->title           = title;
+    window->backgroundColor = GetColor(THEME_BACKGROUND);
+}

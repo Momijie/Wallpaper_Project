@@ -4,8 +4,14 @@
 #include <lauxlib.h>
 #include <lua.h>
 #include <lualib.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 #include "raylib.h"
+#include "rlgl.h"
+#include "x11func.h"
 
 #define LUA_INIT_FILE "./lua/init.lua"
 #define VERSION 1.0
@@ -33,5 +39,4 @@ struct Ornament {
 extern struct Ornament ornament[];
 extern Camera camera;
 
-extern lua_State* GL;
 #endif

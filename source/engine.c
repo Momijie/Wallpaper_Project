@@ -1,10 +1,5 @@
-#include "engine.h"
 
-#include <lauxlib.h>
-#include <lua.h>
-#include <luaconf.h>
-#include <raylib.h>
-#include <stdio.h>
+#include "engine.h"
 
 #include "globals.h"
 #include "unistd.h"
