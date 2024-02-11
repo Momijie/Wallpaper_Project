@@ -9,7 +9,7 @@ static void UnloadGame(void);
 static void UpdateDrawFrame(void);
 static void SetWindow(WW2_Window* window, char* title, int fps, int width, int height);
 
-struct Ornament ornament[ORNAMENT_MAX];
+WW2_Ornament ornament[ORNAMENT_MAX];
 WW2_Window window;
 Camera camera = {0};
 Texture2D texture;

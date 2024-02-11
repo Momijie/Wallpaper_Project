@@ -12,7 +12,7 @@ void SetCamera(Camera* camera, Vector3 position, Vector3 target, Vector3 up, flo
     camera->projection = CAMERA_PERSPECTIVE;
 }
 
-void SetOrnament(struct Ornament* ornament, const char* filename, int x, int y) {
+void SetOrnament(WW2_Ornament* ornament, const char* filename, int x, int y) {
     ornament->texture       = LoadTexture(filename);
     ornament->position.x    = (float)x;
     ornament->position.y    = (float)y;
@@ -21,6 +21,7 @@ void SetOrnament(struct Ornament* ornament, const char* filename, int x, int y) 
     ornament->source.width  = ornament->texture.width;
     ornament->source.height = ornament->texture.height;
 }
+
 static void CheckArgs(lua_State* L, int check[]) {
     int n = lua_gettop(L);
     for (int i = 1; i <= n; i++) {

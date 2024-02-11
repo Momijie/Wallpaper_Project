@@ -27,13 +27,13 @@ typedef struct {
     Color backgroundColor;
 } WW2_Window;
 
-struct Ornament {
+typedef struct {
     Texture2D texture;
     Rectangle source;
     Vector2 position;
-};
+} WW2_Ornament;
 
-extern struct Ornament ornament[];
+extern WW2_Ornament ornament[];
 extern Camera camera;
 
 #endif
