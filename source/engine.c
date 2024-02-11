@@ -4,40 +4,27 @@
 #include "globals.h"
 #include "unistd.h"
 
-static void CheckArgs(lua_State* L, int check[]) {
-    int n = lua_gettop(L);
-    for (int i = 1; i <= n; i++) {
-        luaL_checktype(L, i, check[i - 1]);
+static int AddCamera(lua_State* L);
+static int AddOrnament(lua_State* L);
+static int AddMascot(lua_State* L);
+static void CheckArgs(lua_State* L, int check[]);
+static int fillArray(float array[], lua_State* L, int i);
+
+luaL_Reg libs[] = {{"WW2API_add_camera", AddCamera},
+                   {"WW2API_add_mascot", AddMascot},
+                   {"WW2API_add_ornament", AddOrnament},
+                   {NULL, NULL}};
+
+void InitEngine(void) {
+    lua_State* GL = luaL_newstate();
+    luaL_openlibs(GL);
+    lua_getglobal(GL, "_G");
+    luaL_setfuncs(GL, libs, 0);
+    luaL_dostring(GL, "print('LUA INFO: WAIFU WALLPAPER 2 LUA ENGINE UP AND RUNNING DESU!')");
+
+    if (luaL_dofile(GL, LUA_INIT_FILE) != LUA_OK) {
+        fprintf(stderr, "LUA ERROR: %s", lua_tostring(GL, -1));
     }
-}
-
-static int fillArray(float array[], lua_State* L, int i) {
-    if (!lua_istable(L, i)) {
-        return luaL_error(L, "Not a table\n");
-    }
-
-    int it = 0;
-
-    lua_pushnil(L);
-    while (lua_next(L, i) != 0) {
-        if (lua_type(L, -1) == LUA_TNUMBER) {
-            array[it] = lua_tonumber(L, -1);
-            it++;
-        }
-        lua_pop(L, 1);
-        printf("\n");
-    }
-    return 0;
-}
-
-static int AddMascot(lua_State* L) {
-    CheckArgs(L, ((int[]){LUA_TSTRING, LUA_TNUMBER, LUA_TNUMBER}));
-    if (access(lua_tostring(L, 1), F_OK) != 0) {
-        return luaL_error(L, "Can't access file at %s.\n", lua_tostring(L, 1));
-    }
-    SetOrnament(&ornament[0], lua_tostring(L, 1), lua_tointeger(L, 2), lua_tointeger(L, 3));
-
-    return 0;
 }
 
 static int AddCamera(lua_State* L) {
@@ -66,19 +53,38 @@ static int AddCamera(lua_State* L) {
 
 static int AddOrnament(lua_State* L) { return 0; }
 
-luaL_Reg libs[] = {{"WW2API_add_camera", AddCamera},
-                   {"WW2API_add_mascot", AddMascot},
-                   {"WW2API_add_ornament", AddOrnament},
-                   {NULL, NULL}};
-
-void InitEngine(void) {
-    lua_State* GL = luaL_newstate();
-    luaL_openlibs(GL);
-    lua_getglobal(GL, "_G");
-    luaL_setfuncs(GL, libs, 0);
-    luaL_dostring(GL, "print('LUA INFO: WAIFU WALLPAPER 2 LUA ENGINE UP AND RUNNING DESU!')");
-
-    if (luaL_dofile(GL, LUA_INIT_FILE) != LUA_OK) {
-        fprintf(stderr, "LUA ERROR: %s", lua_tostring(GL, -1));
+static int AddMascot(lua_State* L) {
+    CheckArgs(L, ((int[]){LUA_TSTRING, LUA_TNUMBER, LUA_TNUMBER}));
+    if (access(lua_tostring(L, 1), F_OK) != 0) {
+        return luaL_error(L, "Can't access file at %s.\n", lua_tostring(L, 1));
     }
+    SetOrnament(&ornament[0], lua_tostring(L, 1), lua_tointeger(L, 2), lua_tointeger(L, 3));
+
+    return 0;
+}
+
+static void CheckArgs(lua_State* L, int check[]) {
+    int n = lua_gettop(L);
+    for (int i = 1; i <= n; i++) {
+        luaL_checktype(L, i, check[i - 1]);
+    }
+}
+
+static int fillArray(float array[], lua_State* L, int i) {
+    if (!lua_istable(L, i)) {
+        return luaL_error(L, "Not a table\n");
+    }
+
+    int it = 0;
+
+    lua_pushnil(L);
+    while (lua_next(L, i) != 0) {
+        if (lua_type(L, -1) == LUA_TNUMBER) {
+            array[it] = lua_tonumber(L, -1);
+            it++;
+        }
+        lua_pop(L, 1);
+        printf("\n");
+    }
+    return 0;
 }

@@ -41,10 +41,9 @@ int main(void) {
     return 0;
 }
 
-void InitGame(void) {}
-
-void UpdateGame(void) {}
-void DrawGame(void) {
+static void InitGame(void) {}
+static void UpdateGame(void) {}
+static void DrawGame(void) {
     BeginDrawing();
     ClearBackground(window.backgroundColor);
     BeginMode3D(camera);
@@ -56,14 +55,14 @@ void DrawGame(void) {
     EndDrawing();
 }
 
-void UnloadGame(void) {}
+static void UnloadGame(void) {}
 
-void UpdateDrawFrame(void) {
+static void UpdateDrawFrame(void) {
     UpdateGame();
     DrawGame();
 }
 
-void SetWindow(WW2_Window* window, char* title, int fps, int width, int height) {
+static void SetWindow(WW2_Window* window, char* title, int fps, int width, int height) {
     window->fps             = fps;
     window->width           = width;
     window->height          = height;
