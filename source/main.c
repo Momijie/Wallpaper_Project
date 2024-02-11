@@ -4,6 +4,7 @@
 
 static void InitGame(void);
 static void UpdateGame(void);
+static void DrawMascot(void);
 static void DrawGame(void);
 static void UnloadGame(void);
 static void UpdateDrawFrame(void);
@@ -43,6 +44,8 @@ int main(void) {
 
 static void InitGame(void) {}
 static void UpdateGame(void) {}
+static void DrawMascot(void) { DrawTextureRec(ornament[0].texture, ornament[0].source, ornament[0].position, WHITE); }
+
 static void DrawGame(void) {
     BeginDrawing();
     ClearBackground(window.backgroundColor);
@@ -51,7 +54,7 @@ static void DrawGame(void) {
     DrawModelEx(
         sphere, (Vector3){0.0f, 0.0f, 0.0f}, (Vector3){1.0f, 1.0f, 0.0f}, rotation, (Vector3){4.0f, 4.0f, 4.0f}, WHITE);
     EndMode3D();
-    DrawTextureRec(ornament[0].texture, ornament[0].source, ornament[0].position, WHITE);
+    DrawMascot();
     EndDrawing();
 }
 
