@@ -4,24 +4,6 @@
 #include "globals.h"
 #include "unistd.h"
 
-void SetCamera(Camera* camera, Vector3 position, Vector3 target, Vector3 up, float fovy) {
-    camera->position   = position;
-    camera->target     = target;
-    camera->up         = up;
-    camera->fovy       = fovy;
-    camera->projection = CAMERA_PERSPECTIVE;
-}
-
-void SetOrnament(WW2_Ornament* ornament, const char* filename, int x, int y) {
-    ornament->texture       = LoadTexture(filename);
-    ornament->position.x    = (float)x;
-    ornament->position.y    = (float)y;
-    ornament->source.x      = 0;
-    ornament->source.y      = 0;
-    ornament->source.width  = ornament->texture.width;
-    ornament->source.height = ornament->texture.height;
-}
-
 static void CheckArgs(lua_State* L, int check[]) {
     int n = lua_gettop(L);
     for (int i = 1; i <= n; i++) {
@@ -53,7 +35,6 @@ static int AddMascot(lua_State* L) {
     if (access(lua_tostring(L, 1), F_OK) != 0) {
         return luaL_error(L, "Can't access file at %s.\n", lua_tostring(L, 1));
     }
-
     SetOrnament(&ornament[0], lua_tostring(L, 1), lua_tointeger(L, 2), lua_tointeger(L, 3));
 
     return 0;

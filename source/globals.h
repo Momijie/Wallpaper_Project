@@ -36,4 +36,7 @@ typedef struct {
 extern WW2_Ornament ornament[];
 extern Camera camera;
 
+extern void SetCamera(Camera* camera, Vector3 position, Vector3 target, Vector3 up, float fovy);
+extern void SetOrnament(WW2_Ornament* ornament, const char* filename, int x, int y);
+
 #endif

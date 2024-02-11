@@ -70,3 +70,21 @@ void SetWindow(WW2_Window* window, char* title, int fps, int width, int height) 
     window->title           = title;
     window->backgroundColor = GetColor(THEME_BACKGROUND);
 }
+
+void SetCamera(Camera* camera, Vector3 position, Vector3 target, Vector3 up, float fovy) {
+    camera->position   = position;
+    camera->target     = target;
+    camera->up         = up;
+    camera->fovy       = fovy;
+    camera->projection = CAMERA_PERSPECTIVE;
+}
+
+void SetOrnament(WW2_Ornament* ornament, const char* filename, int x, int y) {
+    ornament->texture       = LoadTexture(filename);
+    ornament->position.x    = (float)x;
+    ornament->position.y    = (float)y;
+    ornament->source.x      = 0;
+    ornament->source.y      = 0;
+    ornament->source.width  = ornament->texture.width;
+    ornament->source.height = ornament->texture.height;
+}
