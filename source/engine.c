@@ -9,8 +9,6 @@
 #include "globals.h"
 #include "unistd.h"
 
-lua_State* GL;
-
 void SetCamera(Camera* camera, Vector3 position, Vector3 target, Vector3 up, float fovy) {
     camera->position   = position;
     camera->target     = target;
@@ -28,7 +26,6 @@ void SetOrnament(struct Ornament* ornament, const char* filename, int x, int y) 
     ornament->source.width  = ornament->texture.width;
     ornament->source.height = ornament->texture.height;
 }
-
 static void CheckArgs(lua_State* L, int check[]) {
     int n = lua_gettop(L);
     for (int i = 1; i <= n; i++) {
@@ -98,7 +95,7 @@ luaL_Reg libs[] = {{"WW2API_add_camera", AddCamera},
                    {NULL, NULL}};
 
 void InitEngine(void) {
-    GL = luaL_newstate();
+    lua_State* GL = luaL_newstate();
     luaL_openlibs(GL);
     lua_getglobal(GL, "_G");
     luaL_setfuncs(GL, libs, 0);

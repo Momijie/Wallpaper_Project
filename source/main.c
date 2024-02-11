@@ -36,11 +36,11 @@ int main(void) {
     InitGame();
     InitEngine();
 
-    texture = LoadTexture("/home/satori/Development/Wallpaper_Project/build/res/curved4.png");
+    texture = LoadTexture("./res/checker.png");
     if (texture.id == 0) {
         TraceLog(LOG_ERROR, "Failed to load texture");
     }
-    sphere                                                 = LoadModelFromMesh(GenMeshSphere(1.0f, 32, 32));
+    sphere                                                 = LoadModelFromMesh(GenMeshSphere(2.0f, 64, 64));
     sphere.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = texture;
 
     GetProgramWindow();
@@ -65,7 +65,7 @@ void DrawGame(void) {
     BeginMode3D(camera);
     rotation += 1;
     DrawModelEx(
-        sphere, (Vector3){0.0f, 0.0f, 0.0f}, (Vector3){0.0f, 1.0f, 0.0f}, rotation, (Vector3){1.0f, 1.0f, 1.0f}, WHITE);
+        sphere, (Vector3){0.0f, 0.0f, 0.0f}, (Vector3){1.0f, 1.0f, 0.0f}, rotation, (Vector3){4.0f, 4.0f, 4.0f}, WHITE);
     EndMode3D();
     DrawTextureRec(ornament[0].texture, ornament[0].source, ornament[0].position, WHITE);
     EndDrawing();
@@ -77,3 +77,4 @@ void UpdateDrawFrame(void) {
     UpdateGame();
     DrawGame();
 }
+
